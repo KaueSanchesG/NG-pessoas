@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th>Nome:</th>
+    <th>Idade:</th>
+  </tr>
+
+  <tr *ngFor="let pessoa of list; let i = index">
+    <td *ngIf="pessoa.idade > 30">
+      {{ pessoa.nome }}
+    </td>
+    <td *ngIf="pessoa.idade > 30">
+      {{ pessoa.idade }}
+    </td>
+  </tr>
+</table>
