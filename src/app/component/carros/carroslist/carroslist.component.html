@@ -1,0 +1,19 @@
+<br />
+<input routerLink="/admin/carros/novo" type="button" value="Add carro" />
+<br />
+
+<table>
+  <tr>
+    <th>Nome:</th>
+    <th>ano:</th>
+  </tr>
+
+  <tr *ngFor="let carro of list; let i = index">
+    <td>
+      {{ carro.nome }}
+    </td>
+    <td>
+      {{ carro.ano }}
+    </td>
+  </tr>
+</table>

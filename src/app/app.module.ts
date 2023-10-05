@@ -6,6 +6,15 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './layout/index/index.component';
 import { PessoasListComponent } from './component/pessoas/pessoas-list/pessoas-list.component';
 import { HeaderComponent } from './component/header/header.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { CarroslistComponent } from './component/carros/carroslist/carroslist.component';
+import { CarrosdetailsComponent } from './component/carros/carrosdetails/carrosdetails.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LivroslistComponent } from './component/livros/livroslist/livroslist.component';
+import { LivrosdetailsComponent } from './component/livros/livrosdetails/livrosdetails.component';
+import { PessoasdetailsComponent } from './component/pessoas/pessoasdetails/pessoasdetails.component';
+import { LoginComponent } from './sistema/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,8 +22,15 @@ import { HeaderComponent } from './component/header/header.component';
     IndexComponent,
     PessoasListComponent,
     HeaderComponent,
+    FooterComponent,
+    CarroslistComponent,
+    CarrosdetailsComponent,
+    LivroslistComponent,
+    LivrosdetailsComponent,
+    PessoasdetailsComponent,
+    LoginComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, NgbModule],
   providers: [],
   bootstrap: [AppComponent],
 })
