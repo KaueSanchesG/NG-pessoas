@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Carro } from '../carro';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,15 +9,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CarrosdetailsComponent {
   roteador = inject(ActivatedRoute);
-  carro!: Carro;
-  mensagem: string = '';
+  carro: Carro = new Carro('', 0);
 
-  constructor() {
-    let id = this.roteador.snapshot.paramMap.get('id');
-    console.log(id);
+  @Input() carroInput!: Carro;
+  @Output() retorno = new EventEmitter<Carro>();
+
+  constructor() {}
+
+  ngOnInit() {
+    if (this.carroInput) {
+      this.carro = this.carroInput;
+    }
   }
-
-  salvarCarro() {
-    this.mensagem = 'Carro salvo com sucesso!';
+  save() {
+    if (this.carro.nome.length !== 0 && this.carro.ano > 0) {
+      this.retorno.emit(this.carro);
+      this.carro = new Carro('', 0);
+    } else {
+      alert('Deve conter um nome e um ano maior que 0');
+    }
   }
 }

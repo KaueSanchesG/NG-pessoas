@@ -1,1 +1,23 @@
-<p>pessoasdetails works!</p>
+<div>
+  <h2>Preencha os campos</h2>
+  <div class="form-group">
+    <label for="nome">Nome:</label>
+    <input
+      type="text"
+      id="nome"
+      class="form-control"
+      [(ngModel)]="pessoa.nome"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="idade">Idade:</label>
+    <input
+      type="number"
+      id="idade"
+      class="form-control"
+      [(ngModel)]="pessoa.idade"
+    />
+  </div>
+  <button id="modalBtn" class="btn btn-primary" (click)="save()">Salvar</button>
+</div>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Pessoa } from '../Pessoa';
+import { Component, inject } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Pessoa } from '../pessoa';
 
 @Component({
   selector: 'app-pessoas-list',
@@ -8,6 +9,12 @@ import { Pessoa } from '../Pessoa';
 })
 export class PessoasListComponent {
   list: Pessoa[] = [];
+  pessoaSelecionada!: Pessoa;
+  indiceSelecionado!: number;
+  editing: boolean = false;
+
+  modal = inject(NgbModal);
+  modalRef: any;
 
   constructor() {
     this.list.push(new Pessoa('Kauê', 20));
@@ -15,11 +22,26 @@ export class PessoasListComponent {
     this.list.push(new Pessoa('Marcelo', 23));
     this.list.push(new Pessoa('Carlos', 30));
     this.list.push(new Pessoa('Pedro', 23));
-    this.list.push(new Pessoa('Simão', 50));
-    this.list.push(new Pessoa('Astolfo', 60));
-    this.list.push(new Pessoa('Romeu', 55));
-    this.list.push(new Pessoa('Jade', 32));
-    this.list.push(new Pessoa('Junior', 27));
-    this.list.push(new Pessoa('Lucas', 12));
+  }
+
+  openModal(abc: any) {
+    this.modalRef = this.modal.open(abc, { size: 'lg' });
+  }
+
+  addToList(pessoa: Pessoa) {
+    if (this.editing) {
+      this.list[this.indiceSelecionado] = pessoa;
+      this.editing = false;
+    } else {
+      this.list.push(pessoa);
+    }
+    this.modalRef.close();
+  }
+
+  update(index: number, abc: any) {
+    this.pessoaSelecionada = this.list[index];
+    this.indiceSelecionado = index;
+    this.editing = true;
+    this.openModal(abc);
   }
 }

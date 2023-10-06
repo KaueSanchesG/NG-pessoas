@@ -1,19 +1,53 @@
-<br />
-<input routerLink="/admin/carros/novo" type="button" value="Add carro" />
-<br />
+<div class="container">
+  <button (click)="openModal(abc)">Add carro</button>
 
-<table>
-  <tr>
-    <th>Nome:</th>
-    <th>ano:</th>
-  </tr>
+  <table>
+    <tr>
+      <th>Nome:</th>
+      <th>Ano:</th>
+      <th>Edição:</th>
+    </tr>
 
-  <tr *ngFor="let carro of list; let i = index">
-    <td>
-      {{ carro.nome }}
-    </td>
-    <td>
-      {{ carro.ano }}
-    </td>
-  </tr>
-</table>
+    <tr *ngFor="let carro of list; let i = index">
+      <td>
+        {{ carro.nome }}
+      </td>
+      <td>
+        {{ carro.ano }}
+      </td>
+      <td>
+        <button type="button" class="btn btn-warning" (click)="update(i, abc)">
+          Editar
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<ng-template #abc let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" *ngIf="editing">Editar Carro</h4>
+    <h4 class="modal-title" *ngIf="!editing">Criar Carro</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-carrosdetails
+      (retorno)="addToList($event)"
+      [carroInput]="carroSelecionado"
+    ></app-carrosdetails>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Fechar
+    </button>
+  </div>
+</ng-template>
