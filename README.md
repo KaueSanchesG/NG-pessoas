@@ -1,7 +1,8 @@
 # NG-pessoas 🚀
 
 ## Sobre 📘
-<!--![Gif-3](https://github.com/KaueSanchesG/estacionamento_client/assets/95658722/e55aaed2-5e84-4a2e-a901-6152fe5ce77d)-->
+![gif](https://github.com/KaueSanchesG/NG-pessoas/assets/95658722/4eb94862-ccb4-4a40-ae52-d7352e5fd025)
+
 Design do projeto no figma [aqui!](https://www.figma.com/file/3jq0QTCzhcaPQmaZm4ILsX/NG-pessoas-design?type=design&node-id=0%3A1&mode=design&t=LLyUgHe0PPRyuXyb-1)
 
 Esse pro projeto foi feito utilizando Angular V2, projeto proposto pela faculdade para melhor conhecer o framework.
