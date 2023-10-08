@@ -14,6 +14,7 @@ O projeto está concluido porem sempre ha melhorias, aqui vou listar algumas:
 * Melhorar a aplicação de estilização dos componentes, está de acordo com o figma porem está bem sujo as folhas de estilização.
 * Componentiza para melhor dinamicidade do projeto, algumas configurações poderiam se tornar componentes; 
 * Implementar o alert do Bootstrap
+* Há um bug, quando editar e depois criar, o cadastro vai editar o item que foi "editado" e criar um novo com as mesmas especificações.
 
 ## Como utilizar 📋
 
