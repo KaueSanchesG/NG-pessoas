@@ -15,6 +15,7 @@ import { LivrosdetailsComponent } from './component/livros/livrosdetails/livrosd
 import { PessoasdetailsComponent } from './component/pessoas/pessoasdetails/pessoasdetails.component';
 import { LoginComponent } from './sistema/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { TabelaComponent } from './component/tabela/tabela.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     LivrosdetailsComponent,
     PessoasdetailsComponent,
     LoginComponent,
+    TabelaComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, NgbModule],
   providers: [],

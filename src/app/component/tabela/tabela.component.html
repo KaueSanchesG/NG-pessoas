@@ -1,0 +1,22 @@
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <th *ngFor="let coluna of colunas">{{ coluna }}</th>
+      <th>Edição</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dado of dados; let i = index">
+        <td *ngFor="let coluna of colunas">{{ dado[coluna.toLowerCase()] }}</td>
+        <td style="display: flex; justify-content: center">
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="editarLinhaClick.emit(i); incrementarIndice()"
+          >
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

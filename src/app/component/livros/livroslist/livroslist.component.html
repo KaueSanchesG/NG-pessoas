@@ -1,27 +1,16 @@
 <div class="container">
-  <button (click)="openModal(abc)">Add livro</button>
+  <div class="estilo-black">
+    <button class="cadastrar-btn" (click)="openModal(abc)">Cadastrar</button>
 
-  <table>
-    <tr>
-      <th>Titulo:</th>
-      <th>Autor:</th>
-      <th>Edição:</th>
-    </tr>
-
-    <tr *ngFor="let livro of list; let i = index">
-      <td>
-        {{ livro.titulo }}
-      </td>
-      <td>
-        {{ livro.autor }}
-      </td>
-      <td>
-        <button type="button" class="btn btn-warning" (click)="update(i, abc)">
-          Editar
-        </button>
-      </td>
-    </tr>
-  </table>
+    <div class="table-container">
+      <app-tabela
+        *ngIf="list.length > 0"
+        [colunas]="['Titulo', 'Autor']"
+        [dados]="list"
+        (editarLinhaClick)="update($event, abc)"
+      ></app-tabela>
+    </div>
+  </div>
 </div>
 
 <ng-template #abc let-modal>
@@ -41,13 +30,5 @@
       [livroInput]="livroSelecionado"
     ></app-livrosdetails>
   </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-light"
-      (click)="modal.close('Close click')"
-    >
-      Fechar
-    </button>
-  </div>
+  <div class="modal-footer"></div>
 </ng-template>
