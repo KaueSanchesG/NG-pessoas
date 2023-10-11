@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pessoa } from '../pessoa';
+import { Pessoa } from 'src/app/models/pessoa';
+import { PessoaService } from 'src/app/services/pessoa.service';
 
 @Component({
   selector: 'app-pessoasdetails',
@@ -14,6 +15,8 @@ export class PessoasdetailsComponent {
   @Input() pessoaInput!: Pessoa;
   @Output() retorno = new EventEmitter<Pessoa>();
 
+  pessoaService = inject(PessoaService);
+
   constructor() {}
 
   ngOnInit() {
@@ -24,8 +27,18 @@ export class PessoasdetailsComponent {
 
   save() {
     if (this.pessoa.nome.length !== 0 && this.pessoa.idade > 0) {
-      this.retorno.emit(this.pessoa);
-      this.pessoa = new Pessoa('', 0); // Limpar o objeto após salvar
+      this.pessoaService.save(this.pessoa).subscribe({
+        next: (pessoa) => {
+          this.retorno.emit(this.pessoa);
+        },
+        error: (erro) => {
+          // QUANDO DÁ ERRO
+          alert(
+            'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+          );
+          console.error(erro);
+        },
+      });
     } else {
       alert('Deve conter um nome e idade maior que 0');
     }

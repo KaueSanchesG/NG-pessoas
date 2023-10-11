@@ -3,19 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IndexComponent } from './layout/index/index.component';
-import { PessoasListComponent } from './component/pessoas/pessoas-list/pessoas-list.component';
-import { HeaderComponent } from './component/header/header.component';
-import { FooterComponent } from './component/footer/footer.component';
-import { CarroslistComponent } from './component/carros/carroslist/carroslist.component';
-import { CarrosdetailsComponent } from './component/carros/carrosdetails/carrosdetails.component';
+import { IndexComponent } from './components/layout/index/index.component';
+import { PessoasListComponent } from './components/pessoas/pessoas-list/pessoas-list.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { CarroslistComponent } from './components/carros/carroslist/carroslist.component';
+import { CarrosdetailsComponent } from './components/carros/carrosdetails/carrosdetails.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LivroslistComponent } from './component/livros/livroslist/livroslist.component';
-import { LivrosdetailsComponent } from './component/livros/livrosdetails/livrosdetails.component';
-import { PessoasdetailsComponent } from './component/pessoas/pessoasdetails/pessoasdetails.component';
-import { LoginComponent } from './sistema/login/login.component';
+import { LivroslistComponent } from './components/livros/livroslist/livroslist.component';
+import { LivrosdetailsComponent } from './components/livros/livrosdetails/livrosdetails.component';
+import { PessoasdetailsComponent } from './components/pessoas/pessoasdetails/pessoasdetails.component';
+import { LoginComponent } from './components/sistema/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { TabelaComponent } from './component/tabela/tabela.component';
+import { TabelaComponent } from './components/tabela/tabela.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,13 @@ import { TabelaComponent } from './component/tabela/tabela.component';
     LoginComponent,
     TabelaComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, NgbModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

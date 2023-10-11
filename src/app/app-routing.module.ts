@@ -1,13 +1,13 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from './layout/index/index.component';
-import { PessoasListComponent } from './component/pessoas/pessoas-list/pessoas-list.component';
-import { PessoasdetailsComponent } from './component/pessoas/pessoasdetails/pessoasdetails.component';
-import { CarroslistComponent } from './component/carros/carroslist/carroslist.component';
-import { CarrosdetailsComponent } from './component/carros/carrosdetails/carrosdetails.component';
-import { LoginComponent } from './sistema/login/login.component';
-import { LivroslistComponent } from './component/livros/livroslist/livroslist.component';
-import { LivrosdetailsComponent } from './component/livros/livrosdetails/livrosdetails.component';
+import { IndexComponent } from './components/layout/index/index.component';
+import { PessoasListComponent } from './components/pessoas/pessoas-list/pessoas-list.component';
+import { PessoasdetailsComponent } from './components/pessoas/pessoasdetails/pessoasdetails.component';
+import { CarroslistComponent } from './components/carros/carroslist/carroslist.component';
+import { CarrosdetailsComponent } from './components/carros/carrosdetails/carrosdetails.component';
+import { LoginComponent } from './components/sistema/login/login.component';
+import { LivroslistComponent } from './components/livros/livroslist/livroslist.component';
+import { LivrosdetailsComponent } from './components/livros/livrosdetails/livrosdetails.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Livro } from '../livro';
+import { Livro } from 'src/app/models/livro';
 
 @Component({
   selector: 'app-livrosdetails',
