@@ -1,22 +1,47 @@
 <div class="container">
-  <div class="estilo-black">
-    <button class="cadastrar-btn" (click)="openModal(abc)">Cadastrar</button>
+  <div class="bg-table-style">
+    <button class="cadastrar-btn" (click)="adicionar(modal1)">Cadastrar</button>
 
     <div class="table-container">
-      <app-tabela
-        *ngIf="list.length > 0"
-        [colunas]="['Titulo', 'Autor']"
-        [dados]="list"
-        (editarLinhaClick)="update($event, abc)"
-      ></app-tabela>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Opções</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let livro of list; let i = index">
+              <td>
+                {{ livro.id }}
+              </td>
+              <td>
+                {{ livro.titulo }}
+              </td>
+              <td>
+                {{ livro.autor }}
+              </td>
+              <td class="option-td">
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  (click)="editar(modal1, livro, i)"
+                >
+                  Editar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-<ng-template #abc let-modal>
+<ng-template #modal1 let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" *ngIf="editing">Editar Livro</h4>
-    <h4 class="modal-title" *ngIf="!editing">Criar Livro</h4>
+    <h4 class="modal-title">Livro</h4>
     <button
       type="button"
       class="btn-close"
@@ -26,9 +51,10 @@
   </div>
   <div class="modal-body">
     <app-livrosdetails
-      (retorno)="addToList($event)"
-      [livroInput]="livroSelecionado"
-    ></app-livrosdetails>
+      [livro]="livroSelecionado"
+      (retorno)="addOuEditar($event)"
+    >
+    </app-livrosdetails>
   </div>
   <div class="modal-footer"></div>
 </ng-template>

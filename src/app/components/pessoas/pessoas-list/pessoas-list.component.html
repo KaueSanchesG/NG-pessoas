@@ -1,22 +1,47 @@
 <div class="container">
-  <div class="estilo-black">
-    <button class="cadastrar-btn" (click)="openModal(abc)">Cadastrar</button>
+  <div class="bg-table-style">
+    <button class="cadastrar-btn" (click)="adicionar(modal1)">Cadastrar</button>
 
     <div class="table-container">
-      <app-tabela
-        *ngIf="list.length > 0"
-        [colunas]="['Nome', 'Idade']"
-        [dados]="list"
-        (editarLinhaClick)="update($event, abc)"
-      ></app-tabela>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Edição</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pessoa of list">
+              <td>
+                {{ pessoa.id }}
+              </td>
+              <td>
+                {{ pessoa.nome }}
+              </td>
+              <td>
+                {{ pessoa.idade }}
+              </td>
+              <td class="option-td">
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  (click)="editar(modal1, pessoa)"
+                >
+                  Editar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-<ng-template #abc let-modal>
+<ng-template #modal1 let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" *ngIf="editing">Editar Pessoa</h4>
-    <h4 class="modal-title" *ngIf="!editing">Criar Pessoa</h4>
+    <h4 class="modal-title">Pessoa</h4>
     <button
       type="button"
       class="btn-close"
@@ -26,8 +51,8 @@
   </div>
   <div class="modal-body">
     <app-pessoasdetails
-      (retorno)="addToList($event)"
-      [pessoaInput]="pessoaSelecionada"
+      [pessoa]="pessoaSelecionada"
+      (retorno)="addOuEditar($event)"
     ></app-pessoasdetails>
   </div>
   <div class="modal-footer"></div>

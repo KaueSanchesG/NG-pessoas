@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Carro } from 'src/app/models/carro';
 import { ActivatedRoute } from '@angular/router';
+import { CarroService } from 'src/app/services/carro.service';
 
 @Component({
   selector: 'app-carrosdetails',
@@ -8,25 +9,23 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./carrosdetails.component.scss'],
 })
 export class CarrosdetailsComponent {
-  roteador = inject(ActivatedRoute);
-  carro: Carro = new Carro('', 0);
-
-  @Input() carroInput!: Carro;
+  @Input() carro!: Carro;
   @Output() retorno = new EventEmitter<Carro>();
 
-  constructor() {}
+  carroService = inject(CarroService);
 
-  ngOnInit() {
-    if (this.carroInput) {
-      this.carro = this.carroInput;
-    }
-  }
+  constructor() {}
   save() {
-    if (this.carro.nome.length !== 0 && this.carro.ano > 0) {
-      this.retorno.emit(this.carro);
-      this.carro = new Carro('', 0);
-    } else {
-      alert('Deve conter um nome e um ano maior que 0');
-    }
+    this.carroService.save(this.carro).subscribe({
+      next: (carro) => {
+        this.retorno.emit(carro);
+      },
+      error: (erro) => {
+        alert(
+          'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+        );
+        console.log(erro);
+      },
+    });
   }
 }

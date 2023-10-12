@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Pessoa } from 'src/app/models/pessoa';
+import { PessoaService } from './../../../services/pessoa.service';
 
 @Component({
   selector: 'app-pessoas-list',
@@ -9,39 +10,60 @@ import { Pessoa } from 'src/app/models/pessoa';
 })
 export class PessoasListComponent {
   list: Pessoa[] = [];
-  pessoaSelecionada!: Pessoa;
+  pessoaSelecionada: Pessoa = new Pessoa();
   indiceSelecionado!: number;
-  editing: boolean = false;
 
   modal = inject(NgbModal);
-  modalRef: any;
+  pessoaService = inject(PessoaService);
 
   constructor() {
-    this.list.push(new Pessoa('Kauê', 20));
-    this.list.push(new Pessoa('Gustavo', 22));
-    this.list.push(new Pessoa('Marcelo', 23));
-    this.list.push(new Pessoa('Carlos', 30));
-    this.list.push(new Pessoa('Pedro', 23));
+    this.listAll();
   }
 
-  openModal(abc: any) {
-    this.modalRef = this.modal.open(abc, { size: 'lg' });
+  listAll() {
+    this.pessoaService.listAll().subscribe({
+      next: (list) => {
+        this.list = list;
+      },
+      error: (erro) => {
+        alert(
+          'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+        );
+        console.log(erro);
+      },
+    });
   }
 
-  addToList(pessoa: Pessoa) {
-    if (this.editing) {
-      this.list[this.indiceSelecionado] = pessoa;
-      this.editing = false;
-    } else {
-      this.list.push(pessoa);
-    }
-    this.modalRef.close();
+  exemploErro() {
+    this.pessoaService.exemploErro().subscribe({
+      next: (list) => {
+        // QUANDO DÁ CERTO
+        this.list = list;
+      },
+      error: (erro) => {
+        // QUANDO DÁ ERRO
+        alert(
+          'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+        );
+        console.error(erro);
+      },
+    });
   }
 
-  update(index: number, abc: any) {
-    this.pessoaSelecionada = this.list[index];
-    this.indiceSelecionado = index;
-    this.editing = true;
-    this.openModal(abc);
+  adicionar(modal: any) {
+    this.pessoaSelecionada = new Pessoa();
+
+    this.modal.open(modal, { size: 'lg' });
+  }
+
+  editar(modal: any, pessoa: Pessoa) {
+    this.pessoaSelecionada = Object.assign({}, pessoa);
+
+    this.modal.open(modal, { size: 'lg' });
+  }
+
+  addOuEditar(pessoa: Pessoa) {
+    this.listAll();
+    this.modal.dismissAll();
   }
 }

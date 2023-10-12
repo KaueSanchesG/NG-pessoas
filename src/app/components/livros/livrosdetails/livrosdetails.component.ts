@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Livro } from 'src/app/models/livro';
+import { LivroService } from 'src/app/services/livro.service';
 
 @Component({
   selector: 'app-livrosdetails',
@@ -8,26 +9,24 @@ import { Livro } from 'src/app/models/livro';
   styleUrls: ['./livrosdetails.component.scss'],
 })
 export class LivrosdetailsComponent {
-  roteador = inject(ActivatedRoute);
-  livro: Livro = new Livro('', '');
-
-  @Input() livroInput!: Livro;
+  @Input() livro!: Livro;
   @Output() retorno = new EventEmitter<Livro>();
+
+  livroService = inject(LivroService);
 
   constructor() {}
 
-  ngOnInit() {
-    if (this.livroInput) {
-      this.livro = this.livroInput;
-    }
-  }
-
   save() {
-    if (this.livro.autor.length != 0 && this.livro.titulo.length != 0) {
-      this.retorno.emit(this.livro);
-      this.livro = new Livro('', '');
-    } else {
-      alert('Deve conter um nome e um autor');
-    }
+    this.livroService.save(this.livro).subscribe({
+      next: (livro) => {
+        this.retorno.emit(livro);
+      },
+      error: (erro) => {
+        alert(
+          'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+        );
+        console.log(erro);
+      },
+    });
   }
 }

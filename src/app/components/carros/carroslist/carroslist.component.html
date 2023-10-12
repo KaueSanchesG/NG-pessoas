@@ -1,22 +1,47 @@
 <div class="container">
-  <div class="estilo-black">
-    <button class="cadastrar-btn" (click)="openModal(abc)">Cadastrar</button>
+  <div class="bg-table-style">
+    <button class="cadastrar-btn" (click)="adicionar(modal1)">Cadastrar</button>
 
     <div class="table-container">
-      <app-tabela
-        *ngIf="list.length > 0"
-        [colunas]="['Nome', 'Ano']"
-        [dados]="list"
-        (editarLinhaClick)="update($event, abc)"
-      ></app-tabela>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Ano</th>
+            <th>Opções</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let carro of list; let i = index">
+              <td>
+                {{ carro.id }}
+              </td>
+              <td>
+                {{ carro.nome }}
+              </td>
+              <td>
+                {{ carro.ano }}
+              </td>
+              <td class="option-td">
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  (click)="editar(modal1, carro, i)"
+                >
+                  Editar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-<ng-template #abc let-modal>
+<ng-template #modal1 let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" *ngIf="editing">Editar Carro</h4>
-    <h4 class="modal-title" *ngIf="!editing">Criar Carro</h4>
+    <h4 class="modal-title">Livro</h4>
     <button
       type="button"
       class="btn-close"
@@ -26,9 +51,10 @@
   </div>
   <div class="modal-body">
     <app-carrosdetails
-      (retorno)="addToList($event)"
-      [carroInput]="carroSelecionado"
-    ></app-carrosdetails>
+      [carro]="carroSelecionado"
+      (retorno)="addOuEditar($event)"
+      >>
+    </app-carrosdetails>
   </div>
   <div class="modal-footer"></div>
 </ng-template>

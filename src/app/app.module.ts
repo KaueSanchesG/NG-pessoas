@@ -15,7 +15,6 @@ import { LivrosdetailsComponent } from './components/livros/livrosdetails/livros
 import { PessoasdetailsComponent } from './components/pessoas/pessoasdetails/pessoasdetails.component';
 import { LoginComponent } from './components/sistema/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { TabelaComponent } from './components/tabela/tabela.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -31,7 +30,6 @@ import { HttpClientModule } from '@angular/common/http';
     LivrosdetailsComponent,
     PessoasdetailsComponent,
     LoginComponent,
-    TabelaComponent,
   ],
   imports: [
     BrowserModule,

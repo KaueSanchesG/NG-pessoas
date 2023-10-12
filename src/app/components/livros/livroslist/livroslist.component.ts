@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Livro } from './../../../models/livro';
+import { LivroService } from 'src/app/services/livro.service';
 
 @Component({
   selector: 'app-livroslist',
@@ -9,40 +10,61 @@ import { Livro } from './../../../models/livro';
 })
 export class LivroslistComponent {
   list: Livro[] = [];
-  livroSelecionado!: Livro;
+  livroSelecionado: Livro = new Livro();
   indiceSelecionado!: number;
-  editing: boolean = false;
 
   modal = inject(NgbModal);
-  modalRef: any;
+  livroService = inject(LivroService);
 
   constructor() {
-    let livro1: Livro = new Livro('Dom Casmurro', 'Machado de assis');
-    let livro2: Livro = new Livro('O alienista', 'Machado de assis');
-    let livro3: Livro = new Livro('O corvo', 'Machado de assis');
-    let livro4: Livro = new Livro('O quinze', 'Rachel de Queiroz');
-
-    this.list.push(livro1, livro2, livro3, livro4);
+    this.listAll();
   }
 
-  openModal(abc: any) {
-    this.modalRef = this.modal.open(abc, { size: 'lg' });
+  listAll() {
+    this.livroService.listAll().subscribe({
+      next: (list) => {
+        this.list = list;
+      },
+      error: (erro) => {
+        alert(
+          'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+        );
+        console.log(erro);
+      },
+    });
   }
 
-  addToList(livro: Livro) {
-    if (this.editing) {
-      this.list[this.indiceSelecionado] = livro;
-      this.editing = false;
-    } else {
-      this.list.push(livro);
-    }
-    this.modalRef.close();
+  exemploErro() {
+    this.livroService.exemploErro().subscribe({
+      next: (list) => {
+        // QUANDO DÁ CERTO
+        this.list = list;
+      },
+      error: (erro) => {
+        // QUANDO DÁ ERRO
+        alert(
+          'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+        );
+        console.error(erro);
+      },
+    });
   }
 
-  update(index: number, abc: any) {
-    this.livroSelecionado = this.list[index];
-    this.indiceSelecionado = index;
-    this.editing = true;
-    this.openModal(abc);
+  adicionar(modal: any) {
+    this.livroSelecionado = new Livro();
+
+    this.modal.open(modal, { size: 'lg' });
+  }
+
+  editar(modal: any, livro: Livro, indice: number) {
+    this.livroSelecionado = Object.assign({}, livro);
+    this.indiceSelecionado = indice;
+
+    this.modal.open(modal, { size: 'lg' });
+  }
+
+  addOuEditar(livro: Livro) {
+    this.listAll();
+    this.modal.dismissAll();
   }
 }
