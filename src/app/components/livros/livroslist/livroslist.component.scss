@@ -30,7 +30,6 @@
   overflow-y: scroll;
   height: fit-content;
   max-height: 66.4vh;
-  color: #92a3ff;
   margin-top: 3px;
   width: 60vw;
 }
@@ -47,14 +46,13 @@ table {
   border-spacing: 0px;
   z-index: 2;
   width: 100%;
-  background-color: #92a2ff;
 }
 
 table th {
   position: sticky;
   top: 0px;
-  background-color: #92a3ff;
-  color: rgb(241, 245, 179);
+  background-color: #001f3f;
+  color: white;
   text-align: center;
   font-weight: normal;
   font-size: 1.2vw;
@@ -70,8 +68,8 @@ table td {
 table td {
   text-align: left;
   font-size: 1.1vw;
-  border: 1px solid #92a3ff;
-  color: black;
+  border: 1px solid #001f3f;
+  color: #001f3f;
   background-color: rgba(255, 255, 255, 0.818);
 }
 
