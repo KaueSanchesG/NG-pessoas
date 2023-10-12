@@ -23,4 +23,9 @@ export class PessoaService {
   exemploErro(): Observable<Pessoa[]> {
     return this.http.get<Pessoa[]>(this.API + '/erro');
   }
+
+  delete(pessoa: Pessoa): Observable<Pessoa> {
+    const url = `${this.API}/${pessoa.id}`;
+    return this.http.delete<Pessoa>(url);
+  }
 }

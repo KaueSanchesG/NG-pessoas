@@ -67,4 +67,17 @@ export class LivroslistComponent {
     this.listAll();
     this.modal.dismissAll();
   }
+
+  excluir(livro: Livro) {
+    if (confirm('Deseja realmente excluir este carro?')) {
+      this.livroService.delete(livro).subscribe(
+        () => {
+          this.listAll();
+        },
+        (error) => {
+          console.error('Erro ao excluir o carro:', error);
+        }
+      );
+    }
+  }
 }

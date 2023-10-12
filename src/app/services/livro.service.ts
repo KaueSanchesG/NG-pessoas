@@ -16,10 +16,17 @@ export class LivroService {
   listAll(): Observable<Livro[]> {
     return this.http.get<Livro[]>(this.API);
   }
+
   save(livro: Livro): Observable<Livro> {
     return this.http.post<Livro>(this.API, livro);
   }
+
   exemploErro(): Observable<Livro[]> {
     return this.http.get<Livro[]>(this.API + '/erro');
+  }
+
+  delete(livro: Livro): Observable<Livro> {
+    const url = `${this.API}/${livro.id}`;
+    return this.http.delete<Livro>(url);
   }
 }

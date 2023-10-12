@@ -66,4 +66,17 @@ export class PessoasListComponent {
     this.listAll();
     this.modal.dismissAll();
   }
+
+  excluir(pessoa: Pessoa) {
+    if (confirm('Deseja realmente excluir este carro?')) {
+      this.pessoaService.delete(pessoa).subscribe(
+        () => {
+          this.listAll();
+        },
+        (error) => {
+          console.error('Erro ao excluir o carro:', error);
+        }
+      );
+    }
+  }
 }

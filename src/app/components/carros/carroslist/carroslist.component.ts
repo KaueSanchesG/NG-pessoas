@@ -67,4 +67,17 @@ export class CarroslistComponent {
     this.listAll();
     this.modal.dismissAll();
   }
+
+  excluir(carro: Carro) {
+    if (confirm('Deseja realmente excluir este carro?')) {
+      this.carroService.delete(carro).subscribe(
+        () => {
+          this.listAll();
+        },
+        (error) => {
+          console.error('Erro ao excluir o carro:', error);
+        }
+      );
+    }
+  }
 }
